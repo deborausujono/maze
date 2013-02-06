@@ -1,0 +1,65 @@
+import java.util.Vector;
+import java.util.Scanner;
+
+public class Transition2 implements Transition {
+
+    private int val;
+    private Location loc;
+    private boolean[] arrows;
+
+    public Transition2(Scanner sc, Location l) {
+	val = sc.nextInt();
+	loc = l;
+    }
+
+    public State doTrans(State oldState, TheGame g) {
+	Vector<Location> targetLocs = new Vector<Location>();
+	Location[][] locs = g.getLocations();
+	
+	int size = locs.length;
+	int i = loc.getRow(), j = loc.getCol();
+	
+	
+	int dRow, dCol;
+	if (oldState != null) {
+	    dRow = oldState.getLoc().getRow() - i;
+	    dCol = oldState.getLoc().getCol() - j;
+	}
+	else {
+	    dRow = 0;
+	    dCol = 0;
+	}
+
+	boolean[] newArrows = new boolean[4];
+	
+	if ((i+val < size) && !(dRow > 0)) { //down
+	    targetLocs.add(locs[i+val][j]);
+	    newArrows[2] = true;
+	}
+	if (i-val >= 0 && !(dRow < 0)) { //up
+	    targetLocs.add(locs[i-val][j]);
+	    newArrows[0] = true;
+	}
+	if (j+val < size && !(dCol > 0)) { //->
+	    targetLocs.add(locs[i][j+val]);
+	    newArrows[1] = true;
+	}
+	if (j-val >= 0 && !(dCol < 0)) { //<-
+	    targetLocs.add(locs[i][j-val]);
+	    newArrows[3] = true;
+	}
+
+	//if targetLocs == null > end(); win=false;
+
+	return new State(loc, val, newArrows, targetLocs);
+    }
+
+    public int getVal() {
+	return val;
+    }
+    
+    public boolean[] getArrows() {
+	return arrows;
+    }
+    
+}

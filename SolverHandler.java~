@@ -1,0 +1,15 @@
+import java.awt.event.*;
+
+public class SolverHandler implements ActionListener {
+
+    private TheGame game;
+
+    public SolverHandler(TheGame g) {
+	game = g;
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+	game.solve();
+    }
+
+}

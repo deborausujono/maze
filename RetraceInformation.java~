@@ -1,0 +1,12 @@
+public class SolverInformation {
+
+    State fromState;
+    Location toLoc;
+
+    public SolverInformation(int v, boolean[] a, Vector<Location> t) {
+	currentVal = v;
+	currentArrows = a;
+	targetLocs = t;
+    }
+    
+}

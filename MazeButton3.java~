@@ -1,0 +1,85 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+import java.lang.Math;
+
+public class MazeButton3 extends MazeButton implements ActionListener {
+	
+    private Color bgCol;
+    private Color arrowsCol;
+    private Color dotCol = new Color(75, 75, 75, 0);
+    private boolean[] arrows;
+    private String s;
+	
+    public MazeButton3(Color bgC, int v, boolean[] a) {
+	super();
+	bgCol = bgC;
+	arrows = a;
+
+	if (v == -2) s = "Goal";
+	else if (v == -1) arrowsCol = Color.yellow;
+	else if (v == 0) arrowsCol = Color.black;
+	else arrowsCol = Color.red;
+
+	this.setEnabled(false);
+	this.setBackground(bgCol);
+	this.addActionListener(this);
+    }
+
+    public void paintComponent(Graphics g) {
+	super.paintComponent(g);
+
+	g.setColor(dotCol);
+	g.fillOval(5, 5, 10, 10);
+
+	if (arrows != null) {
+	    g.setColor(arrowsCol);
+	    
+	    int origin = 35;
+	    double[] angles = { 0, Math.PI/4, Math.PI/2, 3*Math.PI/4,
+				Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4 };
+	    
+	    int[] xPts = { 35, 45, 40, 40, 30, 30, 25 };
+	    int[] yPts = { 5, 15, 15, 40, 40, 15, 15 };
+		
+	    for (int i=0; i<arrows.length; i++) {
+		if (arrows[i]) {
+		    //System.out.println("Drawing " + i);
+		    int[] newXPts = new int[xPts.length];
+		    int[] newYPts = new int[yPts.length];
+		    
+		    for (int j=0; j<xPts.length; j++) {
+			newXPts[j] = (int)(Math.cos(angles[i])*(xPts[j]-origin)
+					   - Math.sin(angles[i])*
+					   (yPts[j]-origin) + origin);
+			newYPts[j] = (int)(Math.sin(angles[i])*(xPts[j]-origin)
+					   + Math.cos(angles[i])*
+					   (yPts[j]-origin) + origin);
+		    }
+		    
+		    g.fillPolygon(newXPts, newYPts, xPts.length);
+		}
+	    }
+	}
+
+	else {
+	    g.setColor(Color.black);
+	    g.drawString(s, 20, 30);
+	}
+    }
+
+    public void bump(int alpha) {
+	dotCol = new Color(75, 75, 75, alpha);
+	repaint();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+	dotCol = new Color(75, 75, 75, 255);
+	repaint();
+    }
+    
+}

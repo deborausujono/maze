@@ -1,0 +1,7 @@
+public interface Transition {
+
+    public State doTrans(State oldState, TheGame g);
+    public int getVal();
+    public boolean[] getArrows();
+    
+}

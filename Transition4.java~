@@ -1,0 +1,92 @@
+import java.util.Vector;
+import java.util.Scanner;
+
+public class Transition4 implements Transition {
+
+    private int val;
+    private boolean[] arrows = new boolean[8];
+    private Location loc;
+
+    public Transition4(Scanner sc, Location l) {
+	val = sc.nextInt();
+ 
+	int index = sc.nextInt();
+	arrows[index] = true;
+
+	loc = l;
+    }
+
+    public State doTrans(State oldState, TheGame g) {
+	Vector<Location> targetLocs = new Vector<Location>();
+	Location[][] locs = g.getLocations();
+
+	int size= locs.length;
+	int myRow = loc.getRow(), myCol = loc.getCol();
+	
+	if (arrows[0]) {
+	    for (int i=myRow; i>=0; i--) {
+		if (val != locs[i][myCol].getVal())
+		    targetLocs.add(locs[i][myCol]);
+	    }
+	}
+	else if (arrows[1]) {
+	    for (int i=myRow, j=myCol; i>=0 && j<size; i--, j++) {
+		if (val != locs[i][j].getVal())
+		    targetLocs.add(locs[i][j]);
+	    }
+	}
+	else if (arrows[2]) {
+	    for (int j=myCol; j<size ; j++) {
+		if (val != locs[myRow][j].getVal())
+		    targetLocs.add(locs[myRow][j]);
+	    }
+	}
+	else if (arrows[3]) {
+	    for (int i=myRow, j=myCol; i<size && j<size ; i++, j++) {
+		if (val != locs[i][j].getVal())
+		    targetLocs.add(locs[i][j]);
+	    }
+	}
+	else if (arrows[4]) {
+	    for (int i=myRow; i<size; i++) {
+		if (val != locs[i][myCol].getVal())
+		    targetLocs.add(locs[i][myCol]);
+	    }
+	}
+	else if (arrows[5]) {
+	    for (int i=myRow, j=myCol; i<size && j>=0; i++, j--) {
+		if (val != locs[i][j].getVal())
+		    targetLocs.add(locs[i][j]);
+	    }
+	}
+	else if (arrows[6]) {
+	    for (int j=myCol; j>=0; j--) {
+		if (val != locs[myRow][j].getVal())
+		    targetLocs.add(locs[myRow][j]);
+	    }
+	}
+	else {
+	    for (int i=myRow, j=myCol; i>=0 && j>=0; i--, j--) {
+		if (val != locs[i][j].getVal())
+		    targetLocs.add(locs[i][j]);
+	    }
+	}
+	
+	//If targetLocs is empty and you can't move, you lose!
+	if (targetLocs.isEmpty()) {
+	    g.setWin(false);
+	    return null;
+	}
+
+	return new State(loc, val, null, targetLocs);
+    }
+
+    public int getVal() {
+	return val;
+    }
+
+    public boolean[] getArrows() {
+	return arrows;
+    }
+
+}

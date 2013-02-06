@@ -1,0 +1,19 @@
+import java.util.Vector;
+
+public class SolverQ {
+    
+    private Vector<Transition> theQ;
+    
+    public SolverQ() {
+	theQ = new Vector<Transition>();
+    }
+    
+    public void add(Transition t){
+	theQ.add(t);
+    }
+    
+    public Transition remove() {
+	return theQ.remove(0);
+    }
+    
+}

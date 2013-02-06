@@ -1,0 +1,56 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Font;
+
+public class MazeButton12 extends MazeButton {
+	
+    private Color bgCol;
+    private Color dotCol = new Color(75, 75, 75, 0);
+    private String s;
+	
+    public MazeButton12(Color bgC, int v) {
+	bgCol = bgC;
+	s = v+"";
+
+	this.setEnabled(false);
+	this.setBackground(bgCol);
+    }
+
+    public void paintComponent(Graphics g) {
+	super.paintComponent(g);
+
+	if (!s.equals("-2")) {
+	    //Draw a value on the square
+	    g.setColor(Color.black);
+	    g.setFont(new Font("Arial", Font.BOLD, 52));
+	    g.drawString(s, 20, 52);
+	}
+	else {
+	    //Draw bull's eye on goal square
+	    g.setColor(Color.blue);
+	    g.fillOval(10, 10, 50, 50);
+
+	    g.setColor(Color.red);
+	    g.fillOval(20, 20, 30, 30);
+
+	    g.setColor(Color.blue);
+	    g.fillOval(30, 30, 10, 10);
+	}
+
+	//Draw a dot
+	g.setColor(dotCol);
+	g.fillOval(5, 5, 15, 15);
+  
+    }
+
+    public void bump(int alpha) {
+	dotCol = new Color(75, 75, 75, alpha);
+	repaint();
+    }
+
+    public void showDot() {
+	dotCol = new Color(75, 75, 75, 255);
+	repaint();
+    }
+    
+}

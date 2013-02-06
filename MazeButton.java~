@@ -1,0 +1,21 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+import java.lang.Math;
+
+public class MazeButton extends JButton implements ActionListener {
+
+    /*	
+    public MazeButton() {
+	super();
+    }
+    */
+
+    public void bump(int alpha) { }
+    public void actionPerformed(ActionEvent e) { }
+    
+}

@@ -1,0 +1,84 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class MazePanel extends JPanel {
+
+    private MazeButton[][] buttons;
+
+    public MazePanel(Location[][] loc) {
+	int size = loc.length;
+	//GameHandler hand = new GameHandler(game);
+
+	this.setLayout(new GridLayout(0, size));
+	this.setPreferredSize(new Dimension(560, 560));
+
+	buttons = new MazeButton[size][size];
+	for (int i=0; i<size; i++) {
+	    for (int j=0; j<size; j++) {
+		buttons[i][j] = loc[i][j].getButton();
+		//buttons[i][j].addActionListener(hand);
+		this.add(buttons[i][j]);
+	    }
+	}
+    }
+    
+    /*
+    public void changeColors() {
+	
+	for (int j = 0; j<4; j++) {
+	    
+	    cs[j] = new Color((int) (Math.random()*255),
+			      (int) (Math.random()*255),
+			      (int) (Math.random()*255));
+	    
+	}
+    }
+    
+    public void bump() {
+	if (smaller) {
+	    offset++;
+	    r--;
+	    repaint();
+	    
+	    if (r==0) smaller = false;
+	}
+	else {
+	    offset++;
+	    r++;
+	    repaint();
+	    
+	    if (r==150) smaller = true;
+	}
+    }
+    
+    public void paintComponent(Graphics g) {
+	
+	super.paintComponent(g);
+	
+	int x, y;
+	
+	
+	for (int i=0; i<number; i++) {
+	    
+	    g.setColor(cs[i%4]);
+	    
+	    x = (2*150-r) + (int) (r*Math.sin((i+offset*0.1)*Math.PI*2.0/number));
+	    y = (2*150-r) + (int) (r*Math.cos((i+offset*0.1)*Math.PI*2.0/number));
+	    
+	    g.fillOval(x,y,i+10,i+10);
+	    
+	}
+	
+    }
+    
+    
+    
+    public void actionPerformed(ActionEvent arg0) {
+	changeColors();
+	repaint();
+	
+    }
+    
+    */
+    
+}

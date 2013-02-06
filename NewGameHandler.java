@@ -1,0 +1,20 @@
+import java.awt.event.*;
+import javax.swing.JComboBox;
+
+public class NewGameHandler implements ActionListener {
+
+    private MazeFrame frame;
+    private JComboBox mazeComboBox;
+
+    public NewGameHandler(JComboBox b, MazeFrame f) {
+	mazeComboBox = b;
+	frame = f;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+	frame.getContentPane().removeAll();
+	frame.newGame(mazeComboBox.getSelectedItem().toString());
+	frame.getContentPane().validate();
+    }
+
+}

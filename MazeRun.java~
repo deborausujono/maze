@@ -1,0 +1,19 @@
+import java.awt.*;
+
+public class MazeRun {
+	
+    public static void main(String[] args) {
+	newGame("maze3");
+    }
+
+    public static void newGame(String s) {
+	MazeFrame frame = new MazeFrame(s);
+	frame.init();
+	
+	frame.pack();
+	frame.setVisible(true);
+	frame.repaint();
+	
+    }
+    
+}
